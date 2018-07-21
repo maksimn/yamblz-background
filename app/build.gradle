@@ -82,6 +82,7 @@ android {
 
 // Libraries declared in dependencies.gradle in the root of the project
 dependencies {
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile libraries.dagger
     annotationProcessor  libraries.daggerCompiler
 

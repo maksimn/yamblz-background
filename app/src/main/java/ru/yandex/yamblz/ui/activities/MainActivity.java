@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -32,5 +35,9 @@ public class MainActivity extends BaseActivity {
                     .replace(R.id.main_frame_layout, new ContentFragment())
                     .commit();
         }
+
+        // Create global configuration and initialize ImageLoader with this config
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
+        ImageLoader.getInstance().init(config);
     }
 }
