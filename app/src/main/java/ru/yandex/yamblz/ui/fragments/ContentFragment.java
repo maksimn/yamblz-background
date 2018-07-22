@@ -32,7 +32,9 @@ public class ContentFragment extends BaseFragment {
 
         String[] urls = new String[] {
                 "http://via.placeholder.com/150x150/ff0000/ffffff",
-                "http://via.placeholder.com/150x150/0000ff/ffffff"
+                "http://via.placeholder.com/150x150/0000ff/ffffff",
+                "http://via.placeholder.com/150x150/cc0099/ffffff",
+                "http://via.placeholder.com/150x150/33cc33/ffffff"
         };
 
         collageLoader.loadCollage(Arrays.asList(urls), collageImageView);

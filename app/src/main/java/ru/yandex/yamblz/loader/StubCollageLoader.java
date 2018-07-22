@@ -1,28 +1,28 @@
 package ru.yandex.yamblz.loader;
 
 import android.graphics.Bitmap;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StubCollageLoader implements CollageLoader {
     @Override
     public void loadCollage(List<String> urls, ImageView imageView) {
-        String firstUrl = urls.get(0);
-
         ImageLoader imageLoader = ImageLoader.getInstance();
+        List<Bitmap> bitmaps = new ArrayList<>();
 
-        imageLoader.loadImage(firstUrl, new SimpleImageLoadingListener() {
-            @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                // loaded bitmap is here (loadedImage)
-                imageView.setImageBitmap(loadedImage);
-            }
-        });
+        for (String url : urls) {
+            Bitmap bitmap = imageLoader.loadImageSync(url);
+            bitmaps.add(bitmap);
+        }
+
+        CollageStrategy collageStrategy = new HorizontalCollageStrategy();
+        Bitmap resultBitmap = collageStrategy.create(bitmaps);
+
+        imageView.setImageBitmap(resultBitmap);
     }
 
     @Override
