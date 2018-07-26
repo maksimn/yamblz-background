@@ -1,5 +1,6 @@
 package ru.yandex.yamblz.ui.fragments;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import java.util.Arrays;
 import ru.yandex.yamblz.R;
 import ru.yandex.yamblz.loader.CollageLoader;
 import ru.yandex.yamblz.loader.CollageLoaderManager;
+import ru.yandex.yamblz.ui.viewModels.CollageViewModel;
 
 public class ContentFragment extends BaseFragment {
 
@@ -23,20 +25,13 @@ public class ContentFragment extends BaseFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
 
-        ImageView collageImageView = (ImageView) getView().findViewById(R.id.collageImageView);
-
-        CollageLoader collageLoader = CollageLoaderManager.getLoader();
-
-        String[] urls = new String[] {
-                "http://via.placeholder.com/150x150/ff0000/ffffff",
-                "http://via.placeholder.com/150x150/0000ff/ffffff",
-                "http://via.placeholder.com/150x150/cc0099/ffffff",
-                "http://via.placeholder.com/150x150/33cc33/ffffff"
-        };
-
-        collageLoader.loadCollage(Arrays.asList(urls), collageImageView);
+        ImageView collageImageView = (ImageView)getView().findViewById(R.id.collageImageView);
+        CollageViewModel model = ViewModelProviders.of(this).get(CollageViewModel.class);
+        model.getData().observe(this, bitmap -> {
+            collageImageView.setImageBitmap(bitmap);
+        });
     }
 }

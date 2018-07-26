@@ -1,7 +1,6 @@
 package ru.yandex.yamblz.ui.activities;
 
 import android.annotation.SuppressLint;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -16,7 +15,6 @@ import ru.yandex.yamblz.R;
 import ru.yandex.yamblz.developer_settings.DeveloperSettingsModule;
 import ru.yandex.yamblz.ui.fragments.ContentFragment;
 import ru.yandex.yamblz.ui.other.ViewModifier;
-import ru.yandex.yamblz.ui.viewModels.CollageViewModel;
 
 public class MainActivity extends BaseActivity {
 
@@ -41,10 +39,5 @@ public class MainActivity extends BaseActivity {
         // Create global configuration and initialize ImageLoader with this config
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);
-
-        CollageViewModel model = ViewModelProviders.of(this).get(CollageViewModel.class);
-        model.getData().observe(this, data -> {
-
-        });
     }
 }
