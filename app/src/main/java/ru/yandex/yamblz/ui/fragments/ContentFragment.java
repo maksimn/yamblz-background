@@ -46,11 +46,11 @@ public class ContentFragment extends BaseFragment {
             CollageViewModel model = ViewModelProviders
                     .of(this, new CollageViewModelFactory(this.getActivity().getApplication(), info))
                     .get(CollageViewModel.class);
-        }
 
-//        model.getData().observe(this, bitmap -> {
-//            collageImageView.setImageBitmap(bitmap);
-//        });
+            model.getData().observe(this, bmp -> {
+
+            });
+        }
     }
 
     private List<CollageInfo> populateCollageInfo() {
