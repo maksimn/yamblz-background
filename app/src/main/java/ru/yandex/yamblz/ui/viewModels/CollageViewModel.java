@@ -8,10 +8,10 @@ import android.graphics.Bitmap;
 public class CollageViewModel extends AndroidViewModel {
     private CollageLiveData data;
 
-    public CollageViewModel(Application application) {
+    public CollageViewModel(Application application, CollageInfo info) {
         super(application);
 
-        data = new CollageLiveData(application);
+        data = new CollageLiveData(application, info);
     }
 
     public LiveData<Bitmap> getData() {

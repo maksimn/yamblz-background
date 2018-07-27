@@ -25,6 +25,7 @@ import java.util.List;
 import ru.yandex.yamblz.R;
 import ru.yandex.yamblz.ui.viewModels.CollageInfo;
 import ru.yandex.yamblz.ui.viewModels.CollageViewModel;
+import ru.yandex.yamblz.ui.viewModels.CollageViewModelFactory;
 
 public class ContentFragment extends BaseFragment {
 
@@ -38,15 +39,24 @@ public class ContentFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
         ImageView collageImageView = (ImageView)getView().findViewById(R.id.collageImageView);
-        CollageViewModel model = ViewModelProviders.of(this).get(CollageViewModel.class);
 
+        List<CollageInfo> collageInfos = populateCollageInfo();
+
+        for (CollageInfo info : collageInfos) {
+            CollageViewModel model = ViewModelProviders
+                    .of(this, new CollageViewModelFactory(this.getActivity().getApplication(), info))
+                    .get(CollageViewModel.class);
+        }
+
+//        model.getData().observe(this, bitmap -> {
+//            collageImageView.setImageBitmap(bitmap);
+//        });
+    }
+
+    private List<CollageInfo> populateCollageInfo() {
         String collagesJson = readCollagesJsonFromRaw();
         Type listType = new TypeToken<ArrayList<CollageInfo>>(){}.getType();
-        List<CollageInfo> collageInfos = new Gson().fromJson(collagesJson, listType);
-
-        model.getData().observe(this, bitmap -> {
-            collageImageView.setImageBitmap(bitmap);
-        });
+        return new Gson().fromJson(collagesJson, listType);
     }
 
     private String readCollagesJsonFromRaw() {
@@ -69,8 +79,6 @@ public class ContentFragment extends BaseFragment {
             }
         }
 
-        String jsonString = writer.toString();
-
-        return jsonString;
+        return writer.toString();
     }
 }

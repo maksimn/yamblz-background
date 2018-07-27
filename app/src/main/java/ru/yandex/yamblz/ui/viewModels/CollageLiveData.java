@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import ru.yandex.yamblz.loader.CollageStrategy;
@@ -18,17 +17,10 @@ import ru.yandex.yamblz.loader.HorizontalCollageStrategy;
 public class CollageLiveData extends LiveData<Bitmap> {
     private final Context context;
 
-    public CollageLiveData(Application context) {
+    public CollageLiveData(Application context, CollageInfo info) {
         this.context = context;
 
-        String[] urls = new String[] {
-                "http://via.placeholder.com/150x150/ff0000/ffffff",
-                "http://via.placeholder.com/150x150/0000ff/ffffff",
-                "http://via.placeholder.com/150x150/cc0099/ffffff",
-                "http://via.placeholder.com/150x150/33cc33/ffffff"
-        };
-
-        createData(Arrays.asList(urls));
+        createData(info.artists_img_urls);
     }
 
     private void createData(List<String> urls) {
