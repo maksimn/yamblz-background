@@ -41,9 +41,11 @@ public class ContentFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
 
+        List<CollageInfo> collageDataList = new ArrayList<>();
         final RecyclerView recyclerView = getView().findViewById(R.id.collages);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        recyclerView.setAdapter(new CollagesAdapter(this.getActivity()));
+        final CollagesAdapter adapter = new CollagesAdapter(this.getActivity(), collageDataList);
+        recyclerView.setAdapter(adapter);
 
         List<CollageInfo> collageInfoList = populateCollageInfo();
 
@@ -53,7 +55,11 @@ public class ContentFragment extends BaseFragment {
                     .get(CollageViewModel.class);
 
             model.getData().observe(this, bitmap -> {
-
+                CollageInfo collageInfo = new CollageInfo();
+                collageInfo.genre_name = info.genre_name;
+                collageInfo.collage = bitmap;
+                collageDataList.add(collageInfo);
+                adapter.notifyDataSetChanged();
             });
         }
     }

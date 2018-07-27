@@ -1,6 +1,7 @@
 package ru.yandex.yamblz.ui.adapters;
 
 import android.content.Context;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,15 +9,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import ru.yandex.yamblz.R;
+import ru.yandex.yamblz.ui.viewModels.CollageInfo;
 
 public class CollagesAdapter extends RecyclerView.Adapter<CollagesAdapter.ViewHolder> {
+    private List<CollageInfo> mCollageInfoList;
     private Context context;
     private LayoutInflater mInflater;
 
-    public CollagesAdapter(Context context) {
+    public CollagesAdapter(Context context, List<CollageInfo> collageInfoList) {
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
+        mCollageInfoList = collageInfoList;
     }
     // inflates the row layout from xml when needed
     @Override
@@ -27,14 +33,15 @@ public class CollagesAdapter extends RecyclerView.Adapter<CollagesAdapter.ViewHo
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.genreNameTextView.setText("Some text");
-        holder.collageImageView.setImageBitmap(null);
+        CollageInfo collageInfo = mCollageInfoList.get(position);
+        holder.genreNameTextView.setText(collageInfo.genre_name);
+        holder.collageImageView.setImageBitmap(collageInfo.collage);
     }
 
     // total number of rows
     @Override
     public int getItemCount() {
-        return 0;
+        return mCollageInfoList.size();
     }
 
     // stores and recycles views as they are scrolled off screen
