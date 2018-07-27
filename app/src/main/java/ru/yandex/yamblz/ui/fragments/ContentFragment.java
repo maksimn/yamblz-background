@@ -9,14 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import ru.yandex.yamblz.R;
+import ru.yandex.yamblz.ui.viewModels.CollageInfo;
 import ru.yandex.yamblz.ui.viewModels.CollageViewModel;
 
 public class ContentFragment extends BaseFragment {
@@ -34,6 +41,8 @@ public class ContentFragment extends BaseFragment {
         CollageViewModel model = ViewModelProviders.of(this).get(CollageViewModel.class);
 
         String collagesJson = readCollagesJsonFromRaw();
+        Type listType = new TypeToken<ArrayList<CollageInfo>>(){}.getType();
+        List<CollageInfo> collageInfos = new Gson().fromJson(collagesJson, listType);
 
         model.getData().observe(this, bitmap -> {
             collageImageView.setImageBitmap(bitmap);
