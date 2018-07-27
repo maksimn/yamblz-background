@@ -1,0 +1,73 @@
+[{
+  "genre_name": "Rock",
+  "artists_img_urls": [
+    "http://via.placeholder.com/200x200/ff0000/ffffff",
+    "http://via.placeholder.com/200x200/0000ff/ffffff",
+    "http://via.placeholder.com/200x200/cc0099/ffffff",
+    "http://via.placeholder.com/200x200/33cc33/ffffff"
+  ]
+}, {
+  "genre_name": "Pop",
+  "artists_img_urls": [
+    "http://via.placeholder.com/200x200/fe0000/ffffff",
+    "http://via.placeholder.com/200x200/0000ee/ffffff",
+    "http://via.placeholder.com/200x200/dd0099/ffffff",
+    "http://via.placeholder.com/200x200/33dd33/ffffff"
+  ]
+}, {
+  "genre_name": "Postpunk",
+  "artists_img_urls": [
+    "http://via.placeholder.com/200x200/dd0000/ffffff",
+    "http://via.placeholder.com/200x200/0000dd/ffffff",
+    "http://via.placeholder.com/200x200/bb0099/ffffff",
+    "http://via.placeholder.com/200x200/33bb33/ffffff"
+  ]
+}, {
+  "genre_name": "Classics",
+  "artists_img_urls": [
+    "http://via.placeholder.com/200x200/ee0000/ffffff",
+    "http://via.placeholder.com/200x200/0000ee/ffffff",
+    "http://via.placeholder.com/200x200/aa0099/ffffff",
+    "http://via.placeholder.com/200x200/33aa33/ffffff"
+  ]
+}, {
+  "genre_name": "Heavy metal",
+  "artists_img_urls": [
+    "http://via.placeholder.com/200x200/111100/ffffff",
+    "http://via.placeholder.com/200x200/001111/ffffff",
+    "http://via.placeholder.com/200x200/990099/ffffff",
+    "http://via.placeholder.com/200x200/339933/ffffff"
+  ]
+}, {
+  "genre_name": "Black metal",
+  "artists_img_urls": [
+    "http://via.placeholder.com/200x200/664d00/ffffff",
+    "http://via.placeholder.com/200x200/806000/ffffff",
+    "http://via.placeholder.com/200x200/997300/ffffff",
+    "http://via.placeholder.com/200x200/b38600/ffffff"
+  ]
+}, {
+  "genre_name": "Rap",
+  "artists_img_urls": [
+    "http://via.placeholder.com/200x200/4d004d/ffffff",
+    "http://via.placeholder.com/200x200/660066/ffffff",
+    "http://via.placeholder.com/200x200/800080/ffffff",
+    "http://via.placeholder.com/200x200/990099/ffffff"
+  ]
+}, {
+  "genre_name": "Iron Bee",
+  "artists_img_urls": [
+    "http://via.placeholder.com/200x200/000080/ffffff",
+    "http://via.placeholder.com/200x200/000099/ffffff",
+    "http://via.placeholder.com/200x200/0000b3/ffffff",
+    "http://via.placeholder.com/200x200/8080ff/ffffff"
+  ]
+}, {
+  "genre_name": "Postrock",
+  "artists_img_urls": [
+    "http://via.placeholder.com/200x200/00664d/ffffff",
+    "http://via.placeholder.com/200x200/008060/ffffff",
+    "http://via.placeholder.com/200x200/009973/ffffff",
+    "http://via.placeholder.com/200x200/00b386/ffffff"
+  ]
+}]
