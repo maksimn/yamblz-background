@@ -9,8 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -29,33 +27,7 @@ import ru.yandex.yamblz.R;
 import ru.yandex.yamblz.ui.viewModels.CollageInfo;
 import ru.yandex.yamblz.ui.viewModels.CollageViewModel;
 import ru.yandex.yamblz.ui.viewModels.CollageViewModelFactory;
-
-class CollagesAdapter extends RecyclerView.Adapter<CollagesAdapter.ViewHolder> {
-    // inflates the row layout from xml when needed
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-         return null;
-    }
-    // binds the data to the TextView in each row
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
-    }
-
-    // total number of rows
-    @Override
-    public int getItemCount() {
-        return 0;
-    }
-
-    // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        ViewHolder(View itemView) {
-            super(itemView);
-        }
-    }
-}
+import ru.yandex.yamblz.ui.adapters.CollagesAdapter;
 
 public class ContentFragment extends BaseFragment {
 
@@ -71,6 +43,7 @@ public class ContentFragment extends BaseFragment {
 
         final RecyclerView recyclerView = getView().findViewById(R.id.collages);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        recyclerView.setAdapter(new CollagesAdapter(this.getActivity()));
 
         List<CollageInfo> collageInfoList = populateCollageInfo();
 
@@ -79,7 +52,7 @@ public class ContentFragment extends BaseFragment {
                     .of(this, new CollageViewModelFactory(this.getActivity().getApplication(), info))
                     .get(CollageViewModel.class);
 
-            model.getData().observe(this, bmp -> {
+            model.getData().observe(this, bitmap -> {
 
             });
         }
