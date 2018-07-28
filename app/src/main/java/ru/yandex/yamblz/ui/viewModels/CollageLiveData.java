@@ -14,34 +14,40 @@ import java.util.List;
 import ru.yandex.yamblz.loader.CollageStrategy;
 import ru.yandex.yamblz.loader.HorizontalCollageStrategy;
 
-public class CollageLiveData extends LiveData<Bitmap> {
+public class CollageLiveData extends LiveData<List<CollageInfo>> {
     private final Context context;
+    private List<CollageInfo> collageInfoList;
 
-    public CollageLiveData(Application context, CollageInfo info) {
+    public CollageLiveData(Application context, List<CollageInfo> info) {
         this.context = context;
-
-        createData(info.artists_img_urls);
+        collageInfoList = info;
+        createData();
     }
 
-    private void createData(List<String> urls) {
-        new AsyncTask<Void, Void, Bitmap>() {
+    private void createData() {
+        CollageInfo collageInfo = collageInfoList.get(0);
+
+        new AsyncTask<Void, Void, CollageInfo>() {
             @Override
-            protected Bitmap doInBackground(Void[] _void) {
+            protected CollageInfo doInBackground(Void[] _void) {
                 ImageLoader imageLoader = ImageLoader.getInstance();
                 List<Bitmap> bitmaps = new ArrayList<>();
 
-                for (String url : urls) {
+                for (String url : collageInfo.artists_img_urls) {
                     Bitmap bitmap = imageLoader.loadImageSync(url);
                     bitmaps.add(bitmap);
                 }
 
                 CollageStrategy collageStrategy = new HorizontalCollageStrategy();
                 Bitmap resultBitmap = collageStrategy.create(bitmaps);
-                return resultBitmap;
+                collageInfo.collage = resultBitmap;
+                return collageInfo;
             }
             @Override
-            protected void onPostExecute(Bitmap data) {
-                setValue(data);
+            protected void onPostExecute(CollageInfo data) {
+                List<CollageInfo> list = new ArrayList<>();
+                list.add(data);
+                setValue(list);
             }
         }.execute();
     }

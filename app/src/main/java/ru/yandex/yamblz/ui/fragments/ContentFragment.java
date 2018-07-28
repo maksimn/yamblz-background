@@ -49,19 +49,16 @@ public class ContentFragment extends BaseFragment {
 
         List<CollageInfo> collageInfoList = populateCollageInfo();
 
-        for (CollageInfo info : collageInfoList) {
-            CollageViewModel model = ViewModelProviders
-                    .of(this, new CollageViewModelFactory(this.getActivity().getApplication(), info))
-                    .get(CollageViewModel.class);
+        CollageViewModel model = ViewModelProviders
+                .of(this, new CollageViewModelFactory(this.getActivity().getApplication(), collageInfoList))
+                .get(CollageViewModel.class);
 
-            model.getData().observe(this, bitmap -> {
-                CollageInfo collageInfo = new CollageInfo();
-                collageInfo.genre_name = info.genre_name;
-                collageInfo.collage = bitmap;
-                collageDataList.add(collageInfo);
-                adapter.notifyDataSetChanged();
-            });
-        }
+        model.getData().observe(this, result -> {
+            for (CollageInfo info : result) {
+                collageDataList.add(info);
+            }
+            adapter.notifyDataSetChanged();
+        });
     }
 
     private List<CollageInfo> populateCollageInfo() {
