@@ -25,30 +25,32 @@ public class CollageLiveData extends LiveData<List<CollageInfo>> {
     }
 
     private void createData() {
-        CollageInfo collageInfo = collageInfoList.get(0);
+        for (int i = 0; i < collageInfoList.size(); i++) {
+            CollageInfo collageInfo = collageInfoList.get(i);
+            final int _i = i;
 
-        new AsyncTask<Void, Void, CollageInfo>() {
-            @Override
-            protected CollageInfo doInBackground(Void[] _void) {
-                ImageLoader imageLoader = ImageLoader.getInstance();
-                List<Bitmap> bitmaps = new ArrayList<>();
+            new AsyncTask<Void, Void, CollageInfo>() {
+                @Override
+                protected CollageInfo doInBackground(Void[] _void) {
+                    ImageLoader imageLoader = ImageLoader.getInstance();
+                    List<Bitmap> bitmaps = new ArrayList<>();
 
-                for (String url : collageInfo.artists_img_urls) {
-                    Bitmap bitmap = imageLoader.loadImageSync(url);
-                    bitmaps.add(bitmap);
+                    for (String url : collageInfo.artists_img_urls) {
+                        Bitmap bitmap = imageLoader.loadImageSync(url);
+                        bitmaps.add(bitmap);
+                    }
+
+                    CollageStrategy collageStrategy = new HorizontalCollageStrategy();
+                    Bitmap resultBitmap = collageStrategy.create(bitmaps);
+                    collageInfo.collage = resultBitmap;
+                    return collageInfo;
                 }
-
-                CollageStrategy collageStrategy = new HorizontalCollageStrategy();
-                Bitmap resultBitmap = collageStrategy.create(bitmaps);
-                collageInfo.collage = resultBitmap;
-                return collageInfo;
-            }
-            @Override
-            protected void onPostExecute(CollageInfo data) {
-                List<CollageInfo> list = new ArrayList<>();
-                list.add(data);
-                setValue(list);
-            }
-        }.execute();
+                @Override
+                protected void onPostExecute(CollageInfo data) {
+                    collageInfoList.set(_i, data);
+                    setValue(collageInfoList);
+                }
+            }.execute();
+        }
     }
 }

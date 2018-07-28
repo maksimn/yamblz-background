@@ -54,8 +54,12 @@ public class ContentFragment extends BaseFragment {
                 .get(CollageViewModel.class);
 
         model.getData().observe(this, result -> {
-            for (CollageInfo info : result) {
-                collageDataList.add(info);
+            for (int i = 0; i < result.size(); i++) {
+                if (collageDataList.size() <= i) {
+                    collageDataList.add(result.get(i));
+                } else {
+                    collageDataList.set(i, result.get(i));
+                }
             }
             adapter.notifyDataSetChanged();
         });
