@@ -50,7 +50,7 @@ public class CollageLiveData extends LiveData<List<CollageInfo>> {
                     collageInfoList.set(_i, data);
                     setValue(collageInfoList);
                 }
-            }.execute();
+            }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
     }
 }
